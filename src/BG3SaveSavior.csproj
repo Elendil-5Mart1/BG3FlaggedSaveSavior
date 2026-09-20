@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>BG3SaveSavior</AssemblyName>
+    <RootNamespace>BG3SaveSavior</RootNamespace>
+    <Platforms>x64</Platforms>
+    <Version>0.1.0</Version>
+  </PropertyGroup>
+
+  <!-- LSLib (Norbyte) : lecture/écriture native des packages .lsv et des ressources .lsf,
+       la même bibliothèque utilisée par Divine.exe et BG3 Mod Manager. Référencées en DLL
+       locales (pas de paquet NuGet officiel) depuis lib/, copiées telles quelles depuis la
+       release GitHub v1.20.4. -->
+  <ItemGroup>
+    <Reference Include="LSLib">
+      <HintPath>..\lib\LSLib.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\lib\*.dll" Exclude="..\lib\LSLib.dll" CopyToOutputDirectory="PreserveNewest" Link="%(Filename)%(Extension)" />
+  </ItemGroup>
+
+</Project>

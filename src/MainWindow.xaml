@@ -1,0 +1,143 @@
+<Window x:Class="BG3SaveSavior.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:conv="clr-namespace:BG3SaveSavior.Converters"
+        xmlns:swc="clr-namespace:System.Windows.Controls;assembly=PresentationFramework"
+        xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
+        Title="BG3 Save Savior" Height="680" Width="720" MinHeight="380" MinWidth="480"
+        WindowStyle="None" ResizeMode="CanResize"
+        Background="#000000" Foreground="#E8DFCB" FontFamily="Segoe UI">
+    <shell:WindowChrome.WindowChrome>
+        <shell:WindowChrome CaptionHeight="0" ResizeBorderThickness="6" GlassFrameThickness="0" CornerRadius="0" UseAeroCaptionButtons="False"/>
+    </shell:WindowChrome.WindowChrome>
+    <Window.Resources>
+        <conv:StatusToBrushConverter x:Key="StatusToBrush"/>
+        <swc:BooleanToVisibilityConverter x:Key="BoolToVis"/>
+
+        <!-- CloseButtonStyle, BarButtonStyle, RepairButtonStyle : définis dans App.xaml (partagés avec RenameDialog) -->
+
+        <!-- En-tête de campagne : flèche + statut agrégé + nom, façon menu de sauvegarde du jeu -->
+        <Style x:Key="CampaignToggleStyle" TargetType="ToggleButton">
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border Background="Transparent" Padding="2,14">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock x:Name="Arrow" Text="&#9656;" FontSize="22" Foreground="#8A8267"
+                                           Width="30" VerticalAlignment="Center"/>
+                                <ContentPresenter Content="{TemplateBinding Content}" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="Arrow" Property="Text" Value="&#9662;"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.85"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="CampaignExpanderStyle" TargetType="Expander">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Expander">
+                        <StackPanel>
+                            <ToggleButton x:Name="HeaderSite"
+                                          IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}}"
+                                          Style="{StaticResource CampaignToggleStyle}"
+                                          Content="{TemplateBinding Header}"/>
+                            <Border x:Name="Divider" BorderThickness="0,0,0,1" BorderBrush="#1C1A15" Margin="18,0,0,0"/>
+                            <ContentPresenter x:Name="ExpandSite" Visibility="Collapsed"/>
+                        </StackPanel>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsExpanded" Value="True">
+                                <Setter TargetName="ExpandSite" Property="Visibility" Value="Visible"/>
+                                <Setter TargetName="Divider" Property="Visibility" Value="Collapsed"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Barre du haut : titre, dossier, actions, fermeture -->
+        <Grid Grid.Row="0" Height="44" Background="Transparent" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="18,0,0,0">
+                <TextBlock Text="BG3 Save Savior" FontFamily="Cambria" FontSize="19" Foreground="#C9A66B" VerticalAlignment="Center"/>
+                <TextBlock x:Name="FolderPathText" Text="" Foreground="#6B6350" FontSize="15"
+                           Margin="18,0,0,0" VerticalAlignment="Center" MaxWidth="280" TextTrimming="CharacterEllipsis"/>
+                <Button x:Name="ChangeFolderButton" Content="Browse" Style="{StaticResource BarButtonStyle}" Margin="14,0,0,0" Click="ChangeFolderButton_Click"/>
+                <Button x:Name="RefreshButton" Content="Refresh" Style="{StaticResource BarButtonStyle}" Margin="6,0,0,0" Click="RefreshButton_Click"/>
+            </StackPanel>
+            <Button Grid.Column="1" Content="&#10005;" Style="{StaticResource CloseButtonStyle}" Click="CloseButton_Click" VerticalAlignment="Center"/>
+        </Grid>
+
+        <!-- Liste des campagnes, chacune dépliable -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden" PanningMode="VerticalOnly">
+            <ItemsControl x:Name="CampaignsControl" Margin="18,4,18,16">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Expander Style="{StaticResource CampaignExpanderStyle}" IsExpanded="{Binding NeedsAttention, Mode=OneTime}">
+                            <Expander.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <Ellipse Width="8" Height="8" Fill="{Binding AggregateStatus, Converter={StaticResource StatusToBrush}}"
+                                             VerticalAlignment="Center" Margin="0,0,10,0"/>
+                                    <TextBlock Text="{Binding CampaignName}" FontFamily="Cambria" FontSize="20" Foreground="#E8DFCB" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding Saves.Count, StringFormat=' ({0})'}" FontSize="15" Foreground="#6B6350" VerticalAlignment="Center" Margin="2,2,0,0"/>
+                                </StackPanel>
+                            </Expander.Header>
+                            <ItemsControl ItemsSource="{Binding Saves}" Margin="26,2,0,14">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Margin="0,4">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Grid.Column="0" Width="6" Height="6" Fill="{Binding Status, Converter={StaticResource StatusToBrush}}"
+                                                     VerticalAlignment="Center" Margin="0,0,12,0"/>
+                                            <TextBlock Grid.Column="1" Text="{Binding DisplayName}" Foreground="#C7BFA9" FontSize="17"
+                                                       VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+                                            <TextBlock Grid.Column="2" Text="{Binding LastWriteTime, StringFormat='dd/MM/yyyy HH:mm'}"
+                                                       Foreground="#5C5646" FontSize="15" VerticalAlignment="Center" Margin="12,0"/>
+                                            <Button Grid.Column="3" Content="Rename" Style="{StaticResource BarButtonStyle}"
+                                                    Visibility="{Binding CanRename, Converter={StaticResource BoolToVis}}"
+                                                    Margin="0,0,6,0" Click="RenameButton_Click" Tag="{Binding}"/>
+                                            <Button Grid.Column="4" Content="Repair" Style="{StaticResource RepairButtonStyle}"
+                                                    Visibility="{Binding CanRepair, Converter={StaticResource BoolToVis}}"
+                                                    Click="RepairButton_Click" Tag="{Binding}"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Expander>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <TextBlock Grid.Row="2" x:Name="StatusBar" Foreground="#6B6350" FontSize="15" Margin="18,4,18,12" TextWrapping="Wrap"/>
+    </Grid>
+</Window>
