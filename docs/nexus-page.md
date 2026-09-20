@@ -7,7 +7,7 @@ before publishing.
 
 ## Title
 
-> BG3 Save Savior
+> Flagged Save Savior
 
 ## Summary (short, shown in search results/tile)
 
@@ -67,7 +67,7 @@ progression on a repaired save.
 
 1. Download the zip from the Files tab.
 2. Extract anywhere.
-3. Run `BG3SaveSavior.exe` — no installation, no extra runtime required.
+3. Run `BG3FlaggedSaveSavior.exe` — no installation, no extra runtime required.
 
 ### Requirements
 

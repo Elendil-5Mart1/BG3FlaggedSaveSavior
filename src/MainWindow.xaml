@@ -4,7 +4,7 @@
         xmlns:conv="clr-namespace:BG3SaveSavior.Converters"
         xmlns:swc="clr-namespace:System.Windows.Controls;assembly=PresentationFramework"
         xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
-        Title="BG3 Save Savior" Height="680" Width="720" MinHeight="380" MinWidth="480"
+        Title="BG3 Flagged Save Savior" Height="680" Width="720" MinHeight="380" MinWidth="480"
         WindowStyle="None" ResizeMode="CanResize"
         Background="#000000" Foreground="#E8DFCB" FontFamily="Segoe UI">
     <shell:WindowChrome.WindowChrome>
@@ -82,7 +82,7 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="18,0,0,0">
-                <TextBlock Text="BG3 Save Savior" FontFamily="Cambria" FontSize="19" Foreground="#C9A66B" VerticalAlignment="Center"/>
+                <TextBlock Text="Flagged Save Savior" FontFamily="Cambria" FontSize="19" Foreground="#C9A66B" VerticalAlignment="Center"/>
                 <TextBlock x:Name="FolderPathText" Text="" Foreground="#6B6350" FontSize="15"
                            Margin="18,0,0,0" VerticalAlignment="Center" MaxWidth="280" TextTrimming="CharacterEllipsis"/>
                 <Button x:Name="ChangeFolderButton" Content="Browse" Style="{StaticResource BarButtonStyle}" Margin="14,0,0,0" Click="ChangeFolderButton_Click"/>

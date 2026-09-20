@@ -6,10 +6,13 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
-    <AssemblyName>BG3SaveSavior</AssemblyName>
+    <AssemblyName>BG3FlaggedSaveSavior</AssemblyName>
+    <!-- RootNamespace laissé tel quel (identifiant interne, invisible pour l'utilisateur) :
+         renommer les namespaces C# est un refactor de code, pas une question de branding. -->
     <RootNamespace>BG3SaveSavior</RootNamespace>
     <Platforms>x64</Platforms>
     <Version>0.1.0</Version>
+    <Product>BG3 Flagged Save Savior</Product>
   </PropertyGroup>
 
   <!-- LSLib (Norbyte) : lecture/écriture native des packages .lsv et des ressources .lsf,

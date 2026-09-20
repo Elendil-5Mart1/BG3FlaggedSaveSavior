@@ -1,4 +1,4 @@
-# BG3 Save Savior
+# BG3 Flagged Save Savior
 
 A small Windows tool that restores Steam/GOG achievement eligibility on
 **Baldur's Gate 3** saves that got flagged as "modded" — a state the
@@ -14,8 +14,8 @@ that playthrough forever, even after disabling mods and re-enabling the
 in-game achievement system (BG3SE + `EnableAchievements`).
 
 In practice this is only true if you don't touch the save file itself. The
-`Modded` flag can be rewritten directly inside the save, and BG3 Save
-Savior does exactly that: it scans your saves, shows which ones are
+`Modded` flag can be rewritten directly inside the save, and BG3 Flagged
+Save Savior does exactly that: it scans your saves, shows which ones are
 flagged, and repairs them in place (with an automatic backup) so
 achievements unlock normally again when you keep playing that save.
 
@@ -50,7 +50,7 @@ save integrity, or achievements** — confirmed in testing.
 ## Download
 
 Grab the latest build from the [Releases](../../releases) page. Unzip and
-run `BG3SaveSavior.exe` — no installation required.
+run `BG3FlaggedSaveSavior.exe` — no installation required.
 
 ## Building from source
 
@@ -72,8 +72,8 @@ dotnet publish -c Release -r win-x64 --self-contained true -p:PublishSingleFile=
 
 Built on top of [LSLib](https://github.com/Norbyte/lslib) by Norbyte (MIT
 license), the same library used by `Divine.exe` and BG3 Mod Manager to
-read/write Larian's proprietary save formats. BG3 Save Savior uses it
-in-process (no subprocess calls) to:
+read/write Larian's proprietary save formats. BG3 Flagged Save Savior uses
+it in-process (no subprocess calls) to:
 
 1. Back up the original `.lsv` save package.
 2. Unpack it, edit the relevant attribute in `meta.lsf` (or the save name
