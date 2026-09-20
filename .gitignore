@@ -487,3 +487,7 @@ $RECYCLE.BIN/
 /logs.md
 /manual.md
 /todo.md
+
+# Archives de release (à uploader manuellement en asset de Release GitHub,
+# pas à committer dans le dépôt)
+*.zip
