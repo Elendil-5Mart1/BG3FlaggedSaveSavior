@@ -15,15 +15,19 @@ Ready-to-paste content, matching Nexus's own mod-page form fields exactly
 
 ## Full description
 
+Note: Nexus's rich text editor renders backtick/code spans as a full-width
+block, not inline code — the text below intentionally avoids backticks
+(plain text or quotes instead) so it pastes cleanly.
+
 ### Description
 
 BG3 blocks Steam/GOG achievements as soon as a mod is active, via a
-`Modded` flag stored in the save file itself. Once that flag is set, the
+"Modded" flag stored in the save file itself. Once that flag is set, the
 common belief — including among authors of other save-editing tools — is
 that achievements are blocked for that save **forever**, even after
 removing your mods and re-enabling achievements in-game.
 
-That belief is only true if you never touch the save file. The `Modded`
+That belief is only true if you never touch the save file. The "Modded"
 flag can be rewritten directly inside the save package, and that's exactly
 what this tool does: scan your saves, spot the flagged ones, repair them
 with one click (automatic backup first).
@@ -44,7 +48,7 @@ integrity, or achievements.
 
 1. Download the zip from the Files tab.
 2. Extract anywhere.
-3. Run `BG3FlaggedSaveSavior.exe` — no installation, no extra runtime
+3. Run BG3FlaggedSaveSavior.exe — no installation, no extra runtime
    required.
 
 ### Main features
@@ -73,7 +77,7 @@ installed. Other achievement-enabler mods/tools haven't been tested.
 ### Shout outs
 
 Built on [LSLib](https://github.com/Norbyte/lslib) by Norbyte (MIT
-license), the same library used by `Divine.exe` and BG3 Mod Manager to
+license), the same library used by Divine.exe and BG3 Mod Manager to
 read/write Baldur's Gate 3's save formats.
 
 ## Tags
