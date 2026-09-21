@@ -44,6 +44,15 @@ after loading a repaired save. This is a harmless side effect of
 repackaging the save archive — it has no effect on gameplay, save
 integrity, or achievements.
 
+**Note on antivirus warnings**: Some antivirus tools or download managers
+may flag this executable due to it being a small, unsigned, self-contained
+.NET application with no prior download history — this is a common false
+positive for indie tools built this way. The file has been scanned with 64
+antivirus engines on VirusTotal, with only 1 flagging it (a
+known-unreliable heuristic engine); all major antivirus vendors report it
+as clean. Full scan report:
+https://www.virustotal.com/gui/file/73fd51d07fc286f9e5d6cb00793ef86ed4fa33a5ca544364d11856de64e83a07
+
 ### Installation instructions
 
 1. Download the zip from the Files tab.
@@ -55,7 +64,7 @@ integrity, or achievements.
 
 - **Scan** — detects all your saves, grouped by campaign/character, with a
   clean/flagged indicator per save.
-- **Repair** — clears the `Modded` flag on a flagged save with one click,
+- **Repair** — clears the "Modded" flag on a flagged save with one click,
   with an automatic backup of the original before any change.
 - **Rename** — renames a save (in-game display name + file/folder on disk)
   for manual saves. Not available on Quicksave/Autosave slots, since the
