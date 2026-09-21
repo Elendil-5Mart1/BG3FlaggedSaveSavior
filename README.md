@@ -19,10 +19,25 @@ Save Savior does exactly that: it scans your saves, shows which ones are
 flagged, and repairs them in place (with an automatic backup) so
 achievements unlock normally again when you keep playing that save.
 
-Verified in real conditions: a one-shot achievement unlocked immediately
-after repairing a flagged save, and an incremental achievement ("Punch
-Drunk") progressed normally afterwards — confirming the repair restores
-genuine, ongoing achievement eligibility, not just a one-time trigger.
+Verified in real conditions: the endgame achievement **Tactician** unlocked
+after repairing a save that had been flagged as modded and was taken right
+before the final boss fight, then finishing the fight on that repaired
+save. The incremental achievement **Punch Drunk** also progressed normally
+(0/20 → 1/20) after repairing a save and continuing to play it — confirming
+the repair restores genuine, ongoing achievement eligibility across an
+entire playthrough, not just a one-time trigger.
+
+## Requirements
+
+This tool only fixes the save file itself — it does **not** re-enable
+Steam/GOG achievements in the game. You still need a working achievement
+enabler already installed and active before repairing a save:
+
+- Tested with [BG3 Mod Manager (LaughingLeader) v1.0.12.9](https://github.com/LaughingLeader/BG3ModManager/releases/tag/1.0.12.9),
+  with its **Achievement Enabler** option checked, and the Script Extender
+  (BG3SE) installed.
+- Other achievement-enabler mods/tools have **not** been tested and aren't
+  guaranteed to behave the same way.
 
 ## Features
 

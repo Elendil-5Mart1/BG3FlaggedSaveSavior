@@ -34,10 +34,20 @@ unlock normally again as you keep playing that save.
   of the original save before any change.
 - **Rename** saves (in-game name + file/folder on disk) for manual saves.
 
-**Verified in real conditions**: a one-shot achievement unlocked right
-after repairing a flagged save, and an incremental achievement progressed
-normally afterwards on the repaired save — confirming this restores real,
-ongoing achievement eligibility.
+**Verified in real conditions**: the endgame achievement **Tactician**
+unlocked after repairing a save that had been flagged as modded and was
+taken right before the final boss fight, then finishing the fight on that
+repaired save. The incremental achievement **Punch Drunk** also progressed
+normally (0/20 → 1/20) after repairing a save and continuing to play it —
+confirming this restores real, ongoing achievement eligibility across an
+entire playthrough, not just a one-time trigger.
+
+**Requirements**: this tool only fixes the save file — it doesn't
+re-enable achievements in the game itself. You need a working achievement
+enabler already installed. Tested with [BG3 Mod Manager (LaughingLeader)
+v1.0.12.9](https://github.com/LaughingLeader/BG3ModManager/releases/tag/1.0.12.9)
+(Achievement Enabler option checked) + Script Extender (BG3SE). Other
+achievement enablers aren't tested.
 
 **Known cosmetic issue**: the game may show a "file corrupted/tampered"
 warning after loading a repaired/renamed save. This is a harmless

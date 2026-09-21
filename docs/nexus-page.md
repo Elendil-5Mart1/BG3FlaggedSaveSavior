@@ -46,10 +46,13 @@ this tool does.
   Autosave slots — the game always computes its own label for those and
   ignores the stored name, regardless of what any tool does.
 
-Verified in real conditions: a one-shot achievement unlocked immediately
-after repairing a flagged save, and an **incremental** achievement kept
-progressing normally afterwards on that repaired save — confirming this
-restores genuine, ongoing achievement eligibility, not a one-off trick.
+Verified in real conditions: the endgame achievement **Tactician** unlocked
+after repairing a save that had been flagged as modded and was taken right
+before the final boss fight, then finishing the fight on that repaired
+save. The incremental achievement **Punch Drunk** also progressed normally
+(0/20 → 1/20) after repairing a save and continuing to play it — confirming
+this restores genuine, ongoing achievement eligibility across an entire
+playthrough, not a one-off trick.
 
 ### ⚠ Known cosmetic issue
 
@@ -72,6 +75,16 @@ progression on a repaired save.
 ### Requirements
 
 Windows 10/11 (64-bit). No other dependencies — the build is self-contained.
+
+This tool only fixes the save file itself — it does **not** re-enable
+Steam/GOG achievements in the game. You need a working achievement enabler
+already installed and active:
+
+- Tested with [BG3 Mod Manager (LaughingLeader) v1.0.12.9](https://github.com/LaughingLeader/BG3ModManager/releases/tag/1.0.12.9),
+  with its **Achievement Enabler** option checked, and the Script Extender
+  (BG3SE) installed.
+- Other achievement-enabler mods/tools haven't been tested and aren't
+  guaranteed to behave the same way.
 
 ### Credits
 
