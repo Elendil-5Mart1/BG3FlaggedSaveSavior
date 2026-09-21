@@ -11,8 +11,9 @@
          renommer les namespaces C# est un refactor de code, pas une question de branding. -->
     <RootNamespace>BG3SaveSavior</RootNamespace>
     <Platforms>x64</Platforms>
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
     <Product>BG3 Flagged Save Savior</Product>
+    <ApplicationIcon>app.ico</ApplicationIcon>
   </PropertyGroup>
 
   <!-- LSLib (Norbyte) : lecture/écriture native des packages .lsv et des ressources .lsf,
@@ -24,6 +25,14 @@
       <HintPath>..\lib\LSLib.dll</HintPath>
       <Private>true</Private>
     </Reference>
+  </ItemGroup>
+
+  <!-- Nécessaire en plus de <ApplicationIcon> ci-dessus : ApplicationIcon ne couvre que
+       l'icône de l'exe lui-même (explorateur), <Resource> rend le fichier chargeable par
+       Window.Icon="app.ico" dans le XAML (barre des tâches, Alt+Tab). Sans ça, le XAML ne
+       trouve pas la ressource et l'app plante au démarrage (crash constaté le 2026-09-21). -->
+  <ItemGroup>
+    <Resource Include="app.ico" />
   </ItemGroup>
 
   <ItemGroup>

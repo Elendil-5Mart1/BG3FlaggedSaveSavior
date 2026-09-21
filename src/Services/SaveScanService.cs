@@ -53,7 +53,17 @@ public static class SaveScanService
 
     public static SaveEntry ScanSave(string lsvPath, string campaignFolderName)
     {
-        var (characterName, _) = SplitCampaignFolderName(campaignFolderName);
+        // Repli si meta.lsf est illisible (cf. catch plus bas) : découpage du nom de
+        // dossier. Pour les saves Honour Mode, ce dossier est un hash aléatoire sans
+        // séparateur "__" exploitable, d'où le repli générique "Honour Mode" — dans le
+        // cas normal, LeaderName (lu plus bas depuis meta.lsf) le remplace par le vrai
+        // nom du personnage, comme dans le menu de sauvegarde du jeu.
+        var isHonourMode = string.Equals(
+            Path.GetFileNameWithoutExtension(lsvPath), "HonourMode", StringComparison.OrdinalIgnoreCase);
+
+        var characterName = isHonourMode
+            ? "Honour Mode"
+            : SplitCampaignFolderName(campaignFolderName).CharacterName;
 
         var entry = new SaveEntry
         {
@@ -95,6 +105,20 @@ public static class SaveScanService
             var resource = lsfReader.Read();
 
             var metaNode = FindMetaDataNode(resource);
+
+            // LeaderName existe sur toutes les saves (manuelle, Quicksave, Autosave,
+            // Honour Mode) et contient le vrai nom du personnage choisi par le joueur —
+            // confirmé le 2026-09-21 par extraction réelle (Divine.exe) : "Azraël" sur
+            // une save Honour Mode, "Otep" sur une save classique, dans les deux cas
+            // identique à ce qu'affiche le menu de sauvegarde du jeu. Bien plus fiable
+            // que le découpage du nom de dossier, qui ne peut pas gérer Honour Mode
+            // (dossier nommé par un hash aléatoire, sans le nom du personnage).
+            if (metaNode?.Attributes.GetValueOrDefault("LeaderName")?.Value is string leaderName
+                && !string.IsNullOrWhiteSpace(leaderName))
+            {
+                entry.CharacterName = leaderName;
+            }
+
             var moddedAttr = metaNode?.Attributes.GetValueOrDefault("Modded");
             if (moddedAttr == null)
             {

@@ -63,3 +63,27 @@ run `BG3FlaggedSaveSavior.exe`. No installation, no .NET runtime required
 See the [README](../README.md) for details on how it works.
 
 ---
+
+## v0.1.1 release notes
+
+Paste this as the description when publishing the GitHub Release (attach `BG3FlaggedSaveSavior-v0.1.1-win-x64.zip` as the binary asset).
+
+---
+
+### BG3 Flagged Save Savior v0.1.1 — Honour Mode display fix
+
+**Fixed**: Honour Mode saves were showing up grouped under an unreadable
+hexadecimal string instead of a character name (reported by a user on
+Nexus — thanks for flagging it!). The character name is now read directly
+from the save's own metadata (`LeaderName`), the same name the game itself
+shows in its save menu — this also makes grouping more accurate for
+regular saves.
+
+No changes to the repair/rename logic itself — this release is a display
+fix only.
+
+**Download**: grab `BG3FlaggedSaveSavior-v0.1.1-win-x64.zip` below, unzip,
+run `BG3FlaggedSaveSavior.exe`. No installation, no .NET runtime required
+(self-contained build).
+
+---

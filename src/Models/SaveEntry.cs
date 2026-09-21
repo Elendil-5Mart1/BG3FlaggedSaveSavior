@@ -16,7 +16,7 @@ public class SaveEntry : INotifyPropertyChanged
 {
     public required string LsvPath { get; init; }
     public required string CampaignFolderName { get; init; }
-    public required string CharacterName { get; init; }
+    public required string CharacterName { get; set; }
     public required DateTime LastWriteTime { get; init; }
 
     public string DisplayName { get; set; } = "";

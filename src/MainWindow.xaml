@@ -5,6 +5,7 @@
         xmlns:swc="clr-namespace:System.Windows.Controls;assembly=PresentationFramework"
         xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
         Title="BG3 Flagged Save Savior" Height="680" Width="720" MinHeight="380" MinWidth="480"
+        Icon="app.ico"
         WindowStyle="None" ResizeMode="CanResize"
         Background="#000000" Foreground="#E8DFCB" FontFamily="Segoe UI">
     <shell:WindowChrome.WindowChrome>
