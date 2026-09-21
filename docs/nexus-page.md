@@ -1,103 +1,82 @@
 # Nexus Mods presentation text
 
-Draft content for the Nexus mod page. Written in plain markdown-ish
-sections — reformat into Nexus's rich text editor (headers/bold/lists map
-directly) when creating the page. Fill in the bracketed placeholders
-before publishing.
+Ready-to-paste content, matching Nexus's own mod-page form fields exactly
+(General tab + Full description's 5 built-in sections).
 
-## Title
+## General tab
 
-> Flagged Save Savior
+- **Mod Name**: `Flagged Save Savior`
+- **Game**: Baldur's Gate 3
+- **Category**: Utilities
+- **Mod version**: `0.1.0` (keep in sync with the GitHub release tag)
+- **Author or team name**: (as filled on Nexus)
+- **Short description** (250 chars max):
+  > C# app that restores achievement eligibility on saves flagged as "modded" — repairs the save itself.
 
-## Summary (short, shown in search results/tile)
+## Full description
 
-> Restores achievement eligibility on saves flagged as "modded" — repairs
-> the save itself, no reinstall or lost progress required.
-
-## Tags / category
-
-Category: **Save Games** (or **Miscellaneous** if a dedicated "tools"
-category exists). Suggested tags: `achievements`, `save editor`, `utility`.
-
-## Description
-
-### The problem
+### Description
 
 BG3 blocks Steam/GOG achievements as soon as a mod is active, via a
-`Modded` flag stored in the save file itself. Once that flag is set on a
-save, the common belief — including among authors of other save-editing
-tools — is that achievements are blocked for that save **forever**, even
-after removing your mods and re-enabling achievements in-game (BG3SE +
-`EnableAchievements`).
+`Modded` flag stored in the save file itself. Once that flag is set, the
+common belief — including among authors of other save-editing tools — is
+that achievements are blocked for that save **forever**, even after
+removing your mods and re-enabling achievements in-game.
 
 That belief is only true if you never touch the save file. The `Modded`
-flag can be rewritten directly inside the save package, and that's what
-this tool does.
+flag can be rewritten directly inside the save package, and that's exactly
+what this tool does: scan your saves, spot the flagged ones, repair them
+with one click (automatic backup first).
 
-### What it does
+Verified in real conditions: the endgame achievement **Tactician**
+unlocked after repairing a save flagged as modded, taken right before the
+final boss fight, then finishing the fight on that repaired save. The
+incremental achievement **Punch Drunk** also progressed normally (0/20 →
+1/20) after repairing a save and continuing to play it — confirming this
+restores genuine, ongoing achievement eligibility, not a one-off trick.
 
-- **Scan**: detects all your saves (grouped by campaign/character) and
-  shows which ones are flagged as modded.
-- **Repair**: clears the `Modded` flag on a flagged save with one click.
-  The original file is automatically backed up first — nothing is
-  overwritten without a safety copy.
-- **Rename**: renames a save (both its in-game display name and the
-  file/folder on disk) for manual saves. Not available on Quicksave/
-  Autosave slots — the game always computes its own label for those and
-  ignores the stored name, regardless of what any tool does.
+**Known cosmetic issue**: BG3 may show a "file corrupted/tampered" warning
+after loading a repaired save. This is a harmless side effect of
+repackaging the save archive — it has no effect on gameplay, save
+integrity, or achievements.
 
-Verified in real conditions: the endgame achievement **Tactician** unlocked
-after repairing a save that had been flagged as modded and was taken right
-before the final boss fight, then finishing the fight on that repaired
-save. The incremental achievement **Punch Drunk** also progressed normally
-(0/20 → 1/20) after repairing a save and continuing to play it — confirming
-this restores genuine, ongoing achievement eligibility across an entire
-playthrough, not a one-off trick.
-
-### ⚠ Known cosmetic issue
-
-After a repair or rename, BG3 may show a "file corrupted/tampered"
-warning the next time that save is loaded. This is a harmless side effect
-of how the save archive gets repackaged (a known, unresolved issue in the
-underlying library LSLib — [Norbyte/lslib#292 on
-GitHub](https://github.com/Norbyte/lslib/issues/292), where the exact same
-warning reproduces from a plain extract-and-repack with **zero**
-modifications). It has **no effect on gameplay, save integrity, or
-achievements** — confirmed through testing including live achievement
-progression on a repaired save.
-
-### Installation
+### Installation instructions
 
 1. Download the zip from the Files tab.
 2. Extract anywhere.
-3. Run `BG3FlaggedSaveSavior.exe` — no installation, no extra runtime required.
+3. Run `BG3FlaggedSaveSavior.exe` — no installation, no extra runtime
+   required.
+
+### Main features
+
+- **Scan** — detects all your saves, grouped by campaign/character, with a
+  clean/flagged indicator per save.
+- **Repair** — clears the `Modded` flag on a flagged save with one click,
+  with an automatic backup of the original before any change.
+- **Rename** — renames a save (in-game display name + file/folder on disk)
+  for manual saves. Not available on Quicksave/Autosave slots, since the
+  game always computes its own label for those regardless of what's
+  stored.
 
 ### Requirements
 
-Windows 10/11 (64-bit). No other dependencies — the build is self-contained.
+Windows 10/11 (64-bit). No other dependencies — the build is
+self-contained (no .NET install needed).
 
-This tool only fixes the save file itself — it does **not** re-enable
-Steam/GOG achievements in the game. You need a working achievement enabler
-already installed and active:
+This tool only fixes the save file — it does **not** re-enable
+achievements in the game itself. You need a working achievement enabler
+already installed and active. Tested with [BG3 Mod Manager (LaughingLeader)
+v1.0.12.9](https://github.com/LaughingLeader/BG3ModManager/releases/tag/1.0.12.9),
+with its Achievement Enabler option checked, and Script Extender (BG3SE)
+installed. Other achievement-enabler mods/tools haven't been tested.
 
-- Tested with [BG3 Mod Manager (LaughingLeader) v1.0.12.9](https://github.com/LaughingLeader/BG3ModManager/releases/tag/1.0.12.9),
-  with its **Achievement Enabler** option checked, and the Script Extender
-  (BG3SE) installed.
-- Other achievement-enabler mods/tools haven't been tested and aren't
-  guaranteed to behave the same way.
-
-### Credits
+### Shout outs
 
 Built on [LSLib](https://github.com/Norbyte/lslib) by Norbyte (MIT
 license), the same library used by `Divine.exe` and BG3 Mod Manager to
 read/write Baldur's Gate 3's save formats.
 
-### Disclaimer
+## Tags
 
-Not affiliated with Larian Studios. Always keep a backup of your saves —
-this tool makes one automatically before any change, but a second copy
-never hurts.
-
-## Changelog
-
-**v0.1.0** — first public release. Scan, Repair, Rename.
+Category: **Utilities**. Suggested tags: `achievements`, `save editor`,
+`utility`.
